@@ -20,7 +20,7 @@ struct ContentView: View {
                     Label("Authors", systemImage: "person.2")
                 }
             
-            Text("Places")
+            MyPlacesView()
                 .tabItem {
                     Label("My places", systemImage: "house")
                 }

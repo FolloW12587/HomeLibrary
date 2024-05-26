@@ -18,11 +18,11 @@ struct Book {
     let numInSeries: Int?
     
     // где храниться
-    let storage: Storage?
+    let storage: MyStorage?
     let shelfName: String?
     
     // жанр
-    let genre: Genre?
+    var genre: [Genre] = []
     
     // примечание
     var note: String  // У тебя в приложении какой-то странный инструмент группирования книг по примечаниям. Я не очень понял для чего
