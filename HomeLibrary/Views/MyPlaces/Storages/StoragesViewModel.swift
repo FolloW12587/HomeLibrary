@@ -5,11 +5,11 @@
 //  Created by Сергей Дубовой on 26.05.2024.
 //
 
-import Foundation
+import SwiftUI
 
 
-class MyPlacesViewModel: ObservableObject {
-    static var shared = MyPlacesViewModel()
+class StoragesViewModel: ObservableObject {
+    static var shared = StoragesViewModel()
     
     @Published var storages: [MyStorage] = MyStorage.examples
     
@@ -23,5 +23,10 @@ class MyPlacesViewModel: ObservableObject {
     
     func filteredStorages(by room: Room) -> [MyStorage] {
         storages.filter { $0.room == room }
+    }
+    
+    func newStorage(room: Room, name: String, image: Image?=nil) {
+        let storage = MyStorage(room: room, name: name, image: image)
+        storages.append(storage)
     }
 }

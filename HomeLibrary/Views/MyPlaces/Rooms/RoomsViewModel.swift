@@ -11,7 +11,7 @@ import Foundation
 class RoomsViewModel: ObservableObject {
     static var shared = RoomsViewModel()
     
-    @Published var rooms: [Room] = MyPlacesViewModel.shared.rooms
+    @Published var rooms: [Room] = StoragesViewModel.shared.rooms
     private init() {}
     
     func newRoom(name: String) {

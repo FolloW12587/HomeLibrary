@@ -1,43 +1,27 @@
 //
-//  NewStorageView.swift
+//  NewRoomView.swift
 //  HomeLibrary
 //
-//  Created by Сергей Дубовой on 26.05.2024.
+//  Created by Сергей Дубовой on 27.05.2024.
 //
 
 import SwiftUI
 
-struct NewStorageView: View {
+struct NewRoomView: View {
     @Environment(\.dismiss) var dismiss
     
-    @ObservedObject var viewModel = MyPlacesViewModel.shared
-    @State var storageName = ""
-    @State var room: Room = RoomsViewModel.shared.rooms.first ?? Room.noRoom
+    @ObservedObject var viewModel = RoomsViewModel.shared
+    @State var roomName = ""
     
     var body: some View {
         VStack(spacing: 0) {
             title
             
             VStack(alignment: .leading, spacing: 10) {
-                Text("Room")
-                    .font(.headline)
-                
-                if !viewModel.rooms.isEmpty {
-                    Picker("", selection: $room) {
-                        ForEach(viewModel.rooms) { room in
-                            Text(room.name)
-                                .tag(room)
-                        }
-                    }
-                }
-                NavigationLink(destination: Text("New room")) {
-                    Text("Add new room")
-                        .foregroundStyle(.accent)
-                }
-                
                 Text("Name")
                     .font(.headline)
-                TextField("", text: $storageName)
+                
+                TextField("", text: $roomName)
                     .padding()
                     .background {
                         RoundedRectangle(cornerRadius: 10)
@@ -48,8 +32,17 @@ struct NewStorageView: View {
             .padding()
             .foregroundStyle(.black)
             
-            
             Spacer()
+            
+            Button {
+                withAnimation {
+                    save()
+                }
+            } label: {
+                Text("Save")
+            }
+            .buttonStyle(MainButtonStyle())
+            .disabled(roomName.isEmpty)
         }
         .navigationBarHidden(true)
     }
@@ -63,7 +56,7 @@ struct NewStorageView: View {
             }
             
             
-            Text("New storage")
+            Text("New room")
                 .font(.title)
                 .foregroundStyle(.white)
         }
@@ -74,10 +67,15 @@ struct NewStorageView: View {
                 .ignoresSafeArea()
         }
     }
+    
+    func save() {
+        guard roomName.isEmpty else { return }
+        
+        viewModel.newRoom(name: roomName)
+        dismiss()
+    }
 }
 
 #Preview {
-    NavigationView {
-        NewStorageView()
-    }
+    NewRoomView()
 }

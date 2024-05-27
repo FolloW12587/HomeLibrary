@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct StoragesListView: View {
-    @ObservedObject var viewModel = MyPlacesViewModel.shared
+    @ObservedObject var viewModel = StoragesViewModel.shared
     
     private let labelHeight: CGFloat = 25
     private let itemHeight: CGFloat = 55
