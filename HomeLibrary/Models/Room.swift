@@ -18,3 +18,9 @@ struct Room: Identifiable, Hashable, Comparable {
     
     static var noRoom = Room(name: "No room")
 }
+
+extension Room: StringRepresentable {
+    var representation: String {
+        name
+    }
+}

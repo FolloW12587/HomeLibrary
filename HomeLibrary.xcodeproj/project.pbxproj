@@ -13,6 +13,9 @@
 		A10299B92C042479007CC544 /* RoomsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10299B82C042479007CC544 /* RoomsListView.swift */; };
 		A10299BC2C045F82007CC544 /* MainButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10299BB2C045F82007CC544 /* MainButtonStyle.swift */; };
 		A10299BF2C04AF9F007CC544 /* NewRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10299BE2C04AF9F007CC544 /* NewRoomView.swift */; };
+		A10299C52C04B744007CC544 /* StringRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10299C42C04B744007CC544 /* StringRepresentable.swift */; };
+		A10299C72C04B7F8007CC544 /* ItemPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10299C62C04B7F8007CC544 /* ItemPickerView.swift */; };
+		A10299C92C054A59007CC544 /* MultipleItemsPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10299C82C054A59007CC544 /* MultipleItemsPickerView.swift */; };
 		A11FA90F2BF227B700962F67 /* MyPlacesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11FA90E2BF227B700962F67 /* MyPlacesView.swift */; };
 		A11FA9122BF2287200962F67 /* StorageDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11FA9112BF2287200962F67 /* StorageDetailsView.swift */; };
 		A121D9C52C02B81500A30627 /* NewStorageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A121D9C42C02B81500A30627 /* NewStorageView.swift */; };
@@ -37,6 +40,9 @@
 		A10299B82C042479007CC544 /* RoomsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsListView.swift; sourceTree = "<group>"; };
 		A10299BB2C045F82007CC544 /* MainButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButtonStyle.swift; sourceTree = "<group>"; };
 		A10299BE2C04AF9F007CC544 /* NewRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRoomView.swift; sourceTree = "<group>"; };
+		A10299C42C04B744007CC544 /* StringRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringRepresentable.swift; sourceTree = "<group>"; };
+		A10299C62C04B7F8007CC544 /* ItemPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPickerView.swift; sourceTree = "<group>"; };
+		A10299C82C054A59007CC544 /* MultipleItemsPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleItemsPickerView.swift; sourceTree = "<group>"; };
 		A11FA90E2BF227B700962F67 /* MyPlacesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlacesView.swift; sourceTree = "<group>"; };
 		A11FA9112BF2287200962F67 /* StorageDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageDetailsView.swift; sourceTree = "<group>"; };
 		A121D9C42C02B81500A30627 /* NewStorageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewStorageView.swift; sourceTree = "<group>"; };
@@ -85,6 +91,23 @@
 				A121D9C82C02BE8200A30627 /* RoomsViewModel.swift */,
 			);
 			path = Rooms;
+			sourceTree = "<group>";
+		};
+		A10299C32C04B729007CC544 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				A10299C42C04B744007CC544 /* StringRepresentable.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		A10299CA2C054B79007CC544 /* ItemPickers */ = {
+			isa = PBXGroup;
+			children = (
+				A10299C62C04B7F8007CC544 /* ItemPickerView.swift */,
+				A10299C82C054A59007CC544 /* MultipleItemsPickerView.swift */,
+			);
+			path = ItemPickers;
 			sourceTree = "<group>";
 		};
 		A11FA9102BF227BC00962F67 /* MyPlaces */ = {
@@ -137,6 +160,7 @@
 		A13147A02BF07097001A7AAF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A10299C32C04B729007CC544 /* Protocols */,
 				A13147A12BF0709E001A7AAF /* Author.swift */,
 				A13147A52BF071EE001A7AAF /* Series.swift */,
 				A13147A32BF0715B001A7AAF /* Book.swift */,
@@ -150,6 +174,7 @@
 		A13147AD2BF0DA5B001A7AAF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A10299CA2C054B79007CC544 /* ItemPickers */,
 				A11FA9102BF227BC00962F67 /* MyPlaces */,
 				A10299B22C041014007CC544 /* PositionObservingView.swift */,
 				A10299B42C04106F007CC544 /* OffsetObservingScrollView.swift */,
@@ -231,12 +256,15 @@
 				A10299B72C0423D4007CC544 /* StoragesListView.swift in Sources */,
 				A13147A42BF0715B001A7AAF /* Book.swift in Sources */,
 				A13147A22BF0709E001A7AAF /* Author.swift in Sources */,
+				A10299C52C04B744007CC544 /* StringRepresentable.swift in Sources */,
 				A13147AA2BF07440001A7AAF /* Room.swift in Sources */,
 				A11FA90F2BF227B700962F67 /* MyPlacesView.swift in Sources */,
 				A121D9C72C02B85900A30627 /* StoragesViewModel.swift in Sources */,
 				A13147952BF07061001A7AAF /* ContentView.swift in Sources */,
 				A10299BF2C04AF9F007CC544 /* NewRoomView.swift in Sources */,
 				A10299B52C04106F007CC544 /* OffsetObservingScrollView.swift in Sources */,
+				A10299C72C04B7F8007CC544 /* ItemPickerView.swift in Sources */,
+				A10299C92C054A59007CC544 /* MultipleItemsPickerView.swift in Sources */,
 				A13147932BF07061001A7AAF /* HomeLibraryApp.swift in Sources */,
 				A10299B32C041014007CC544 /* PositionObservingView.swift in Sources */,
 				A13147A62BF071EE001A7AAF /* Series.swift in Sources */,

@@ -25,6 +25,7 @@ struct ContentView: View {
                     Label("My places", systemImage: "house")
                 }
         }
+        .preferredColorScheme(.light)
     }
 }
 

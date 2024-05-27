@@ -56,7 +56,7 @@ struct MyPlacesView: View {
                         Image(systemName: "plus")
                     }
                 case .room:
-                    NavigationLink(destination: Text("New room")) {
+                    NavigationLink(destination: NewRoomView()) {
                         Image(systemName: "plus")
                     }
                 }

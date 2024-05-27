@@ -28,8 +28,8 @@ struct NewStorageView: View {
                 Text("Room")
                     .font(.headline)
                 
+                // MARK: Room picker
                 if !viewModel.rooms.isEmpty {
-                    
                     HStack {
                         Text(room.name)
                             .foregroundStyle(.black)
@@ -48,6 +48,8 @@ struct NewStorageView: View {
                         showRoomPicker = true
                     }
                 }
+                
+                // MARK: Add new room
                 NavigationLink(destination: NewRoomView()) {
                     Text("Add new room")
                         .font(viewModel.rooms.isEmpty ? .subheadline : .caption)
@@ -61,6 +63,7 @@ struct NewStorageView: View {
                         }
                 }
                 
+                // MARK: Storage name input
                 Text("Name")
                     .font(.headline)
                 TextField("", text: $storageName)
@@ -69,6 +72,8 @@ struct NewStorageView: View {
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(lineWidth: 0.5)
                     }
+                
+                // TODO: Add here image adding
             }
             .frame(maxWidth: .infinity)
             .padding()
@@ -89,7 +94,8 @@ struct NewStorageView: View {
         }
         .navigationBarHidden(true)
         .sheet(isPresented: $showRoomPicker){
-            RoomPicker(selectedRoom: $room)
+//            RoomPicker(selectedRoom: $room)
+            ItemPickerView(title: "Choose room", selectedItem: $room, selections: viewModel.rooms)
         }
     }
     
@@ -122,49 +128,9 @@ struct NewStorageView: View {
     }
 }
 
-private struct RoomPicker: View {
-    @ObservedObject var viewModel = StoragesViewModel.shared
-    
-    @Binding var selectedRoom: Room
-    private let itemHeight: CGFloat = 55
-    
-    var body: some View {
-        ScrollView {
-            VStack(spacing: 0) {
-                Text("Choose room")
-                    .font(.headline)
-                
-                ForEach(viewModel.rooms) { room in
-                    HStack {
-                        Text(room.name)
-                        
-                        Spacer()
-                        
-                        if selectedRoom == room {
-                            Image(systemName: "checkmark")
-                        }
-                    }
-                    .foregroundStyle(room == selectedRoom ? .accent : .black)
-                    .padding(.vertical, 5)
-                    .padding(.horizontal)
-                    .frame(height: itemHeight-1)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                        withAnimation {
-                            selectedRoom = room
-                        }
-                    }
-                    
-                    Divider()
-                }
-            }
-            .padding(.top)
-        }
-    }
-}
-
 #Preview {
     NavigationView {
         NewStorageView()
     }
+    .preferredColorScheme(.light)
 }
