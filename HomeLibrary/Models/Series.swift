@@ -9,5 +9,6 @@ import Foundation
 
 
 struct Series {
+    let author: Author
     let name: String
 }
