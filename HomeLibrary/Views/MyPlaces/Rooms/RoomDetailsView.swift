@@ -25,7 +25,7 @@ struct RoomDetailsView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(30)
             .background(.white)
-            StoragesListView(storages: StoragesViewModel.shared.filteredStorages(by: room), hideSearch: true)
+            StoragesListView(storages: StoragesViewModel.shared.filteredStorages(by: room))
             
             Spacer()
             
@@ -61,5 +61,7 @@ struct RoomDetailsView: View {
 }
 
 #Preview {
-    RoomDetailsView(room: RoomsViewModel.shared.rooms.first!)
+    NavigationView {
+        RoomDetailsView(room: RoomsViewModel.shared.rooms.first!)
+    }
 }

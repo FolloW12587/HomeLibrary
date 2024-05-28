@@ -11,7 +11,7 @@ struct StoragesListView: View {
     var storages: [MyStorage] = StoragesViewModel.shared.storages
     
     @State private var searchField = ""
-    var hideSearch = false
+    @State private var hideSearch = true
     
     private var rooms: [Room] {
         let rooms = storages.map{ $0.room }
@@ -30,7 +30,6 @@ struct StoragesListView: View {
         filteredStorages().filter { $0.room == room }
     }
     
-    private let labelHeight: CGFloat = 25
     private let itemHeight: CGFloat = 55
     
     var body: some View {
@@ -39,17 +38,18 @@ struct StoragesListView: View {
                 LazyVStack(spacing: 0, pinnedViews: [.sectionHeaders]) {
                     // MARK: Search field
                     if !hideSearch {
-                        HStack {
-                            TextField("Search", text: $searchField)
-                            
+                        HStack(spacing: 5) {
                             Image(systemName: "magnifyingglass")
                                 .foregroundStyle(.secondary)
+                            
+                            TextField("Search", text: $searchField)
                         }
                         .padding()
                         .background(.white)
                         .clipShape(RoundedRectangle(cornerRadius: 15))
                         .padding(10)
                         .background(.colorMain3)
+                        .brightness(0.2)
                     }
                     
                     ForEach(rooms) { room in
@@ -97,8 +97,9 @@ struct StoragesListView: View {
                                     .foregroundStyle(.white)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .padding(.leading)
-                                    .frame(height: labelHeight)
+                                    .padding(.vertical, 2)
                                     .background(.colorMain3)
+                                    .brightness(0.2)
                                     .id(room.id)
                             }
                         }
@@ -108,6 +109,24 @@ struct StoragesListView: View {
             .onAppear {
                 guard let room = rooms.first else { return }
                 proxy.scrollTo(room.id)
+            }
+            .overlay {
+                if rooms.count > 1 && hideSearch {
+                    Button {
+                        withAnimation {
+                            hideSearch = false
+                        }
+                    } label: {
+                        Image(systemName: "magnifyingglass")
+                            .contentShape(Circle())
+                    }
+                    .font(.headline)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+                    .padding(.top, 2)
+                    .padding(.horizontal)
+                    .foregroundStyle(.white)
+                        
+                }
             }
         }
         .background(.white)

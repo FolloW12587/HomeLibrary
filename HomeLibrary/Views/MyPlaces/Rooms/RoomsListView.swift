@@ -16,7 +16,7 @@ struct RoomsListView: View {
         ScrollView {
             VStack(spacing: 0) {
                 ForEach(viewModel.rooms) { room in
-                    NavigationLink(destination: Text(room.name)) {
+                    NavigationLink(destination: RoomDetailsView(room: room)) {
                         HStack {
                             Text(room.name)
                                 .foregroundStyle(.black)
