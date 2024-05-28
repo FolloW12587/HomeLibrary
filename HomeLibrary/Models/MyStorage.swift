@@ -20,7 +20,7 @@ struct MyStorage: Identifiable {
         let guestroom = Room(name: "Гостиная")
         let bedroom = Room(name: "Спальня")
         return [
-            MyStorage(room: guestroom, name: "Комод у двери"),
+            MyStorage(room: guestroom, name: "Полка", image: Image("shelf")),
             MyStorage(room: guestroom, name: "Шкаф"),
             MyStorage(room: bedroom, name: "Стеллаж"),
         ]
