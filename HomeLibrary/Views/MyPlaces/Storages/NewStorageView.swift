@@ -11,6 +11,7 @@ struct NewStorageView: View {
     @Environment(\.dismiss) var dismiss
     
     @ObservedObject var viewModel = StoragesViewModel.shared
+    @ObservedObject var roomsViewModel = RoomsViewModel.shared
     @State var storageName = ""
     @State var room: Room = RoomsViewModel.shared.rooms.first ?? Room.noRoom
     
@@ -29,7 +30,7 @@ struct NewStorageView: View {
                     .font(.headline)
                 
                 // MARK: Room picker
-                if !viewModel.rooms.isEmpty {
+                if !roomsViewModel.rooms.isEmpty {
                     HStack {
                         Text(room.name)
                             .foregroundStyle(.black)
@@ -52,9 +53,9 @@ struct NewStorageView: View {
                 // MARK: Add new room
                 NavigationLink(destination: NewRoomView()) {
                     Text("Add new room")
-                        .font(viewModel.rooms.isEmpty ? .subheadline : .caption)
+                        .font(roomsViewModel.rooms.isEmpty ? .subheadline : .caption)
                         .foregroundStyle(.accent)
-                        .onChange(of: viewModel.rooms) { newValue in
+                        .onChange(of: roomsViewModel.rooms) { newValue in
                             if newValue.isEmpty {
                                 room = Room.noRoom
                             } else if room == Room.noRoom {
@@ -95,7 +96,7 @@ struct NewStorageView: View {
         .navigationBarHidden(true)
         .sheet(isPresented: $showRoomPicker){
 //            RoomPicker(selectedRoom: $room)
-            ItemPickerView(title: "Choose room", selectedItem: $room, selections: viewModel.rooms)
+            ItemPickerView(title: "Choose room", selectedItem: $room, selections: roomsViewModel.rooms)
         }
     }
     
@@ -104,8 +105,8 @@ struct NewStorageView: View {
             Button(action: { dismiss() }) {
                 Image(systemName: "chevron.left")
                     .font(.title2.weight(.semibold))
-                    .frame(maxWidth: .infinity, alignment: .leading)
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
             
             
             Text("New storage")

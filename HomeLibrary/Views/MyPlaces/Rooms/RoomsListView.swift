@@ -15,7 +15,7 @@ struct RoomsListView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
-                ForEach(viewModel.rooms) { room in
+                ForEach(viewModel.rooms.sorted()) { room in
                     NavigationLink(destination: RoomDetailsView(room: room)) {
                         HStack {
                             Text(room.name)

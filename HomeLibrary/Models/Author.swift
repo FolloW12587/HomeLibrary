@@ -9,7 +9,7 @@ import Foundation
 
 
 struct Author: Identifiable {
-    let id: UUID
+    let id: UUID = UUID()
     
     let firstName: String
     let secondName: String

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MyPlacesView: View {
     @State private var currentTab: Tabs = .storages
+    @ObservedObject var storagesViewModel = StoragesViewModel.shared
     
     private let itemHeight: CGFloat = 55
      
@@ -21,7 +22,7 @@ struct MyPlacesView: View {
                 
                 switch currentTab {
                 case .storages:
-                    StoragesListView()
+                    StoragesListView(storages: storagesViewModel.storages)
                         .transition(.move(edge: .leading))
                 case .room:
                     RoomsListView()

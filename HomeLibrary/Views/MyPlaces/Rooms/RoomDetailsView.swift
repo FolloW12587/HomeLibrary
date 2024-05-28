@@ -43,8 +43,8 @@ struct RoomDetailsView: View {
             Button(action: { dismiss() }) {
                 Image(systemName: "chevron.left")
                     .font(.title2.weight(.semibold))
-                    .frame(maxWidth: .infinity, alignment: .leading)
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
             
             
             Text("Room details")

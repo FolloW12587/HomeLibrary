@@ -1,27 +1,55 @@
 //
-//  NewRoomView.swift
+//  NewAuthorView.swift
 //  HomeLibrary
 //
-//  Created by Сергей Дубовой on 27.05.2024.
+//  Created by Сергей Дубовой on 28.05.2024.
 //
 
 import SwiftUI
 
-struct NewRoomView: View {
+struct NewAuthorView: View {
     @Environment(\.dismiss) var dismiss
     
-    @ObservedObject var viewModel = RoomsViewModel.shared
-    @State var roomName = ""
+    @ObservedObject var viewModel = AuthorsViewModel.shared
+    @State private var firstName = ""
+    @State private var secondName = ""
+    @State private var surname = ""
+    
+    private var isFormValid: Bool {
+        !firstName.isEmpty && !secondName.isEmpty
+    }
     
     var body: some View {
         VStack(spacing: 0) {
             title
             
             VStack(alignment: .leading, spacing: 10) {
-                Text("Name")
+                Text("First name")
                     .font(.headline)
                 
-                TextField("", text: $roomName)
+                TextField("", text: $firstName)
+                    .padding()
+                    .background {
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(lineWidth: 0.5)
+                    }
+                    .padding(.bottom)
+                
+                Text("Second name")
+                    .font(.headline)
+                
+                TextField("", text: $secondName)
+                    .padding()
+                    .background {
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(lineWidth: 0.5)
+                    }
+                    .padding(.bottom)
+                
+                Text("Surname")
+                    .font(.headline)
+                
+                TextField("", text: $surname)
                     .padding()
                     .background {
                         RoundedRectangle(cornerRadius: 10)
@@ -42,7 +70,7 @@ struct NewRoomView: View {
                 Text("Save")
             }
             .buttonStyle(MainButtonStyle())
-            .disabled(roomName.isEmpty)
+            .disabled(!isFormValid)
         }
         .navigationBarHidden(true)
     }
@@ -55,8 +83,7 @@ struct NewRoomView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             
-            
-            Text("New room")
+            Text("New author")
                 .font(.title)
                 .foregroundStyle(.white)
         }
@@ -69,13 +96,13 @@ struct NewRoomView: View {
     }
     
     func save() {
-        guard !roomName.isEmpty else { return }
+        guard isFormValid else { return }
         
-        viewModel.newRoom(name: roomName)
+        viewModel.newAuthor(firstName: firstName, secondName: secondName, surname: surname)
         dismiss()
     }
 }
 
 #Preview {
-    NewRoomView()
+    NewAuthorView()
 }
