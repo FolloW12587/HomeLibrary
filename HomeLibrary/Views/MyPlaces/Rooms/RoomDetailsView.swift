@@ -15,20 +15,20 @@ struct RoomDetailsView: View {
         VStack(spacing: 0) {
             title
             
-            VStack(alignment: .leading, spacing: 50) {
+            VStack() {
                 Text(room.name)
                     .font(.title.bold())
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(20)
                 
                 Text("Storages")
                     .font(.title3.bold())
+                    .frame(maxWidth: .infinity, alignment: .center)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(30)
+            .padding(10)
             .background(.white)
             StoragesListView(storages: StoragesViewModel.shared.filteredStorages(by: room))
-            
-            Spacer()
-            
+                        
             // TODO: Implement Delete
             Button(action: {}, label: {
                 Text("Delete")
