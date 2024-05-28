@@ -20,7 +20,7 @@ struct StorageDetailsView: View {
                     .font(.title.bold())
                 
                 // TODO: Change destination
-                NavigationLink(destination: Text(storage.room.name)) {
+                NavigationLink(destination: RoomDetailsView(room: storage.room)) {
                     HStack {
                         Image(systemName: "info.circle")
                         Text(storage.room.name)
