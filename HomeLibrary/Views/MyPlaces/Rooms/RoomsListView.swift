@@ -13,26 +13,21 @@ struct RoomsListView: View {
     private let itemHeight: CGFloat = 55
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 0) {
-                ForEach(viewModel.rooms.sorted()) { room in
-                    NavigationLink(destination: RoomDetailsView(room: room)) {
-                        HStack {
-                            Text(room.name)
-                                .foregroundStyle(.black)
-                            
-                            Spacer()
-                            
-                            Image(systemName: "chevron.right")
-                                .font(.headline)
-                        }
-                        .padding(.vertical, 5)
-                        .padding(.horizontal)
-                        .frame(height: itemHeight-1)
-                    }
-                    Divider()
-                }
+        ItemListView(listOfItems: viewModel.rooms) { room in
+            HStack {
+                Text(room.name)
+                    .foregroundStyle(.black)
+                
+                Spacer()
+                
+                Image(systemName: "chevron.right")
+                    .font(.headline)
             }
+            .padding(.vertical, 5)
+            .padding(.horizontal)
+            .frame(height: itemHeight-1)
+        } destination: { room in
+            RoomDetailsView(room: room)
         }
     }
 }

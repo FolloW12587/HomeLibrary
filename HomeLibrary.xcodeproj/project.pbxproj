@@ -37,6 +37,8 @@
 		A13147AA2BF07440001A7AAF /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13147A92BF07440001A7AAF /* Room.swift */; };
 		A13147AC2BF09F3A001A7AAF /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13147AB2BF09F3A001A7AAF /* Genre.swift */; };
 		A16450462C06C67C009DA711 /* AuthorDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16450452C06C67C009DA711 /* AuthorDetailsView.swift */; };
+		A16450482C06CAB1009DA711 /* ItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16450472C06CAB1009DA711 /* ItemListView.swift */; };
+		A164504A2C06D1D1009DA711 /* ItemListGrouping.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16450492C06D1D1009DA711 /* ItemListGrouping.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +73,8 @@
 		A13147A92BF07440001A7AAF /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		A13147AB2BF09F3A001A7AAF /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		A16450452C06C67C009DA711 /* AuthorDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorDetailsView.swift; sourceTree = "<group>"; };
+		A16450472C06CAB1009DA711 /* ItemListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListView.swift; sourceTree = "<group>"; };
+		A16450492C06D1D1009DA711 /* ItemListGrouping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListGrouping.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				A10299C42C04B744007CC544 /* StringRepresentable.swift */,
+				A16450492C06D1D1009DA711 /* ItemListGrouping.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -203,6 +208,7 @@
 				A10299CA2C054B79007CC544 /* ItemPickers */,
 				A11FA9102BF227BC00962F67 /* MyPlaces */,
 				A10299B22C041014007CC544 /* PositionObservingView.swift */,
+				A16450472C06CAB1009DA711 /* ItemListView.swift */,
 				A10299B42C04106F007CC544 /* OffsetObservingScrollView.swift */,
 				A10299BB2C045F82007CC544 /* MainButtonStyle.swift */,
 			);
@@ -302,7 +308,9 @@
 				A13147A82BF0743A001A7AAF /* MyStorage.swift in Sources */,
 				A10299D12C05BB16007CC544 /* AuthorsListView.swift in Sources */,
 				A13147AC2BF09F3A001A7AAF /* Genre.swift in Sources */,
+				A16450482C06CAB1009DA711 /* ItemListView.swift in Sources */,
 				A10299BC2C045F82007CC544 /* MainButtonStyle.swift in Sources */,
+				A164504A2C06D1D1009DA711 /* ItemListGrouping.swift in Sources */,
 				A10299B92C042479007CC544 /* RoomsListView.swift in Sources */,
 				A10299CF2C05BA50007CC544 /* AuthorsView.swift in Sources */,
 				A121D9C52C02B81500A30627 /* NewStorageView.swift in Sources */,

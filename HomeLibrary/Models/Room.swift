@@ -24,3 +24,7 @@ extension Room: StringRepresentable {
         name
     }
 }
+
+extension Room: ItemListGrouping {
+    
+}

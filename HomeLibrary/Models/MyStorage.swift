@@ -26,3 +26,21 @@ struct MyStorage: Identifiable {
         ]
     }()
 }
+
+extension MyStorage: StringRepresentable {
+    var representation: String {
+        name
+    }
+}
+
+extension MyStorage: Hashable, Comparable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+        hasher.combine(room)
+        hasher.combine(name)
+    }
+    
+    static func < (lhs: MyStorage, rhs: MyStorage) -> Bool {
+        lhs.name < rhs.name
+    }
+}
