@@ -128,6 +128,14 @@ struct StoragesListView: View {
                         
                 }
             }
+            .simultaneousGesture(
+                DragGesture()
+                    .onChanged { gesture in
+                        withAnimation {
+                            hideSearch = true
+                        }
+                    }
+            )
         }
         .background(.white)
     }

@@ -47,7 +47,7 @@ struct AuthorsListView: View {
                     let filtered = filteredAuthors().sorted()
                     Section {
                         ForEach(filtered) { author in
-                            NavigationLink(destination: Text(author.representation)) {
+                            NavigationLink(destination: AuthorDetailsView(author: author)) {
                                 HStack {
                                     Text(author.representation)
                                         .foregroundStyle(.black)

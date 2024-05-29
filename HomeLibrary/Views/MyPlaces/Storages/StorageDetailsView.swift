@@ -33,6 +33,9 @@ struct StorageDetailsView: View {
             .clipShape(RoundedRectangle(cornerRadius: 25.0))
             .offset(y: -25)
             
+            // TODO: Implement Books list here
+            Text("Books list will be here")
+            
             Spacer()
             
             // TODO: Implement Delete

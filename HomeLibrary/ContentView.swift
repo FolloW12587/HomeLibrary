@@ -15,7 +15,7 @@ struct ContentView: View {
                     Label("Books", systemImage: "book")
                 }
             
-            Text("Authors")
+            AuthorsView()
                 .tabItem {
                     Label("Authors", systemImage: "person.2")
                 }

@@ -36,6 +36,7 @@
 		A13147A82BF0743A001A7AAF /* MyStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13147A72BF0743A001A7AAF /* MyStorage.swift */; };
 		A13147AA2BF07440001A7AAF /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13147A92BF07440001A7AAF /* Room.swift */; };
 		A13147AC2BF09F3A001A7AAF /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13147AB2BF09F3A001A7AAF /* Genre.swift */; };
+		A16450462C06C67C009DA711 /* AuthorDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16450452C06C67C009DA711 /* AuthorDetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +70,7 @@
 		A13147A72BF0743A001A7AAF /* MyStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStorage.swift; sourceTree = "<group>"; };
 		A13147A92BF07440001A7AAF /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		A13147AB2BF09F3A001A7AAF /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		A16450452C06C67C009DA711 /* AuthorDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorDetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,10 +98,10 @@
 		A10299BD2C046350007CC544 /* Rooms */ = {
 			isa = PBXGroup;
 			children = (
-				A10299B82C042479007CC544 /* RoomsListView.swift */,
 				A10299BE2C04AF9F007CC544 /* NewRoomView.swift */,
-				A121D9C82C02BE8200A30627 /* RoomsViewModel.swift */,
 				A10299CB2C05A2F1007CC544 /* RoomDetailsView.swift */,
+				A10299B82C042479007CC544 /* RoomsListView.swift */,
+				A121D9C82C02BE8200A30627 /* RoomsViewModel.swift */,
 			);
 			path = Rooms;
 			sourceTree = "<group>";
@@ -124,10 +126,11 @@
 		A10299CD2C05BA40007CC544 /* Authors */ = {
 			isa = PBXGroup;
 			children = (
-				A10299CE2C05BA50007CC544 /* AuthorsView.swift */,
-				A10299D42C05BF3F007CC544 /* NewAuthorView.swift */,
-				A10299D22C05BB45007CC544 /* AuthorsViewModel.swift */,
+				A16450452C06C67C009DA711 /* AuthorDetailsView.swift */,
 				A10299D02C05BB16007CC544 /* AuthorsListView.swift */,
+				A10299CE2C05BA50007CC544 /* AuthorsView.swift */,
+				A10299D22C05BB45007CC544 /* AuthorsViewModel.swift */,
+				A10299D42C05BF3F007CC544 /* NewAuthorView.swift */,
 			);
 			path = Authors;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				A11FA90F2BF227B700962F67 /* MyPlacesView.swift in Sources */,
 				A121D9C72C02B85900A30627 /* StoragesViewModel.swift in Sources */,
 				A13147952BF07061001A7AAF /* ContentView.swift in Sources */,
+				A16450462C06C67C009DA711 /* AuthorDetailsView.swift in Sources */,
 				A10299D52C05BF3F007CC544 /* NewAuthorView.swift in Sources */,
 				A10299BF2C04AF9F007CC544 /* NewRoomView.swift in Sources */,
 				A10299B52C04106F007CC544 /* OffsetObservingScrollView.swift in Sources */,
