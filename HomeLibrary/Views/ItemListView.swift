@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+typealias ItemListGrouping = Identifiable & Comparable & Hashable & StringRepresentable
 struct ItemListView<Item: ItemPickable & StringRepresentable, ItemDestination: View, ItemContent: View>: View {
     let listOfItems: [Item]
     @ViewBuilder var representation: (Item) -> ItemContent
