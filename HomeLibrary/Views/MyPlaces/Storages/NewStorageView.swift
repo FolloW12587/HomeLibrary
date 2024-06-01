@@ -116,7 +116,7 @@ struct NewStorageView: View {
         .padding()
         .frame(maxWidth: .infinity)
         .background {
-            Color.сolorMain
+            Color.colorMain
                 .ignoresSafeArea()
         }
     }

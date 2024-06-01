@@ -63,7 +63,7 @@ struct NewRoomView: View {
         .padding()
         .frame(maxWidth: .infinity)
         .background {
-            Color.сolorMain
+            Color.colorMain
                 .ignoresSafeArea()
         }
     }

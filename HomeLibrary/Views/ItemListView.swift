@@ -31,7 +31,7 @@ struct ItemListView<Item: ItemPickable & StringRepresentable, ItemDestination: V
                     if !hideSearch {
                         HStack(spacing: 5) {
                             Image(systemName: "magnifyingglass")
-                                .foregroundStyle(.secondary)
+                                .foregroundStyle(.colorMain)
                             
                             TextField("Search", text: $searchField)
                         }
@@ -39,8 +39,7 @@ struct ItemListView<Item: ItemPickable & StringRepresentable, ItemDestination: V
                         .background(.white)
                         .clipShape(RoundedRectangle(cornerRadius: 15))
                         .padding(10)
-                        .background(.colorMain3)
-                        .brightness(0.2)
+                        .background(.colorMain4)
                     }
                     
                     Section {
@@ -56,13 +55,12 @@ struct ItemListView<Item: ItemPickable & StringRepresentable, ItemDestination: V
                                 Image(systemName: "magnifyingglass")
                                     .contentShape(Circle())
                             }
-                            .font(.headline)
+                            .font(.subheadline)
+                            .foregroundStyle(.colorMain)
                             .frame(height: 25)
                             .frame(maxWidth: .infinity, alignment: .trailing)
                             .padding(.horizontal)
-                            .foregroundStyle(.white)
-                            .background(.colorMain3)
-                            .brightness(0.2)
+                            .background(.colorMain4)
                         }
                     }
                 }
@@ -131,8 +129,7 @@ struct ItemGrouppedListView<Item: ItemPickable & StringRepresentable, ItemDestin
                         .background(.white)
                         .clipShape(RoundedRectangle(cornerRadius: 15))
                         .padding(10)
-                        .background(.colorMain3)
-                        .brightness(0.2)
+                        .background(.colorMain4)
                     }
                     
                     let groups = groups
@@ -144,12 +141,11 @@ struct ItemGrouppedListView<Item: ItemPickable & StringRepresentable, ItemDestin
                             } header: {
                                 Text(group.representation)
                                     .fontWeight(.semibold)
-                                    .foregroundStyle(.white)
+                                    .foregroundStyle(.colorMain)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .padding(.leading)
                                     .padding(.vertical, 2)
-                                    .background(.colorMain3)
-                                    .brightness(0.2)
+                                    .background(.colorMain4)
                             }
                         }
                     }
@@ -165,11 +161,11 @@ struct ItemGrouppedListView<Item: ItemPickable & StringRepresentable, ItemDestin
                         Image(systemName: "magnifyingglass")
                             .contentShape(Circle())
                     }
-                    .font(.headline)
+                    .font(.subheadline)
+                    .foregroundStyle(.colorMain)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
                     .padding(.top, 2)
                     .padding(.horizontal)
-                    .foregroundStyle(.white)
                         
                 }
             }

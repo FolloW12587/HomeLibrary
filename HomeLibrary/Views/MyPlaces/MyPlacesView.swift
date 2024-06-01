@@ -69,7 +69,7 @@ struct MyPlacesView: View {
         .padding([.horizontal, .top])
         .frame(maxWidth: .infinity)
         .background {
-            Color.сolorMain
+            Color.colorMain
                 .ignoresSafeArea()
         }
     }
