@@ -27,3 +27,11 @@ extension Author: Hashable, Comparable {
         lhs.representation < rhs.representation
     }
 }
+
+extension Author {
+    static let examples: [Author] = [
+        Author(firstName: "Федор", secondName: "Достоевский", surname: "Михайлович"),
+        Author(firstName: "Лев", secondName: "Толстой", surname: "Николаевич"),
+        Author(firstName: "Джоан", secondName: "Роулинг", surname: "Кэтлин"),
+    ]
+}

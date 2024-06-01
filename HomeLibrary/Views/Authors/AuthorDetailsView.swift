@@ -57,5 +57,5 @@ struct AuthorDetailsView: View {
 }
 
 #Preview {
-    AuthorDetailsView(author: AuthorsViewModel.shared.authors[0])
+    AuthorDetailsView(author: Author.examples[0])
 }
