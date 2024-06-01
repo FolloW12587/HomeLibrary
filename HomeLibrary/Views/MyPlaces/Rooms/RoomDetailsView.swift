@@ -25,8 +25,10 @@ struct RoomDetailsView: View {
                     .font(.title3.bold())
                     .frame(maxWidth: .infinity, alignment: .center)
             }
+            .foregroundStyle(.colorMain)
             .padding(10)
             .background(.white)
+            
             StoragesListView(storages: StoragesViewModel.shared.filteredStorages(by: room))
                         
             // TODO: Implement Delete

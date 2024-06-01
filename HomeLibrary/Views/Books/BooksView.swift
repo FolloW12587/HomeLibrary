@@ -21,7 +21,7 @@ struct BooksView: View {
     
     var title: some View {
         ZStack {
-            Text("Authors")
+            Text("Books")
                 .font(.title)
                 .foregroundStyle(.white)
             

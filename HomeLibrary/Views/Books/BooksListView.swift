@@ -9,9 +9,10 @@ import SwiftUI
 
 struct BooksListView: View {
     let books: [Book]
+    var showSortings = true
     
     var body: some View {
-        ItemListView(listOfItems: books, listOfSortings: Book.sortings) { book in
+        ItemListView(listOfItems: books, listOfSortings: showSortings ? Book.sortings : nil) { book in
             HStack {
                 Group {
                     if let image = book.image {
@@ -62,7 +63,7 @@ struct BooksListView: View {
             .padding(.horizontal)
             .frame(height: 100)
         } destination: { book in
-            Text(book.name)
+            BookDetailsView(book: book)
         }
     }
 }

@@ -112,7 +112,7 @@ private struct SortingMenu<Item>: View {
     
     var body: some View {
         Menu {
-            Menu("Sorting") {
+            Menu("Sort by") {
                 ForEach(listOfSortings, id: \.by) { sorting in
                     Button(action: { setSelectedSorting(to: sorting) } ) {
                         if selectedSorting == sorting {

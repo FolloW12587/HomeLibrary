@@ -11,6 +11,12 @@ struct StorageDetailsView: View {
     @Environment(\.dismiss) var dismiss
     let storage: MyStorage
     
+    var books: [Book] {
+        BooksViewModel.shared.books.filter { book in
+            book.storage == storage
+        }
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
             title
@@ -18,8 +24,8 @@ struct StorageDetailsView: View {
             VStack(alignment: .leading, spacing: 10) {
                 Text(storage.name)
                     .font(.title.bold())
+                    .foregroundStyle(.colorMain)
                 
-                // TODO: Change destination
                 NavigationLink(destination: RoomDetailsView(room: storage.room)) {
                     HStack {
                         Image(systemName: "info.circle")
@@ -28,13 +34,16 @@ struct StorageDetailsView: View {
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(30)
+            .padding([.horizontal, .top], 30)
             .background(.white)
             .clipShape(RoundedRectangle(cornerRadius: 25.0))
             .offset(y: -25)
             
-            // TODO: Implement Books list here
-            Text("Books list will be here")
+            if !books.isEmpty {
+                BooksListView(books: books, showSortings: false)
+            } else {
+                Text("Books of this storage will be here")
+            }
             
             Spacer()
             

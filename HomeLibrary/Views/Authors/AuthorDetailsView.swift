@@ -11,6 +11,12 @@ struct AuthorDetailsView: View {
     @Environment(\.dismiss) var dismiss
     let author: Author
     
+    private var books: [Book] {
+        BooksViewModel.shared.books.filter { book in
+            book.author == author
+        }
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
             title
@@ -20,8 +26,11 @@ struct AuthorDetailsView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(20)
             
-            // TODO: Implement Books list here
-            Text("Books list will be here")
+            if !books.isEmpty {
+                BooksListView(books: books, showSortings: false)
+            } else {
+                Text("Books of this author will be here")
+            }
             
             Spacer()
             
@@ -31,6 +40,7 @@ struct AuthorDetailsView: View {
                     .foregroundStyle(.red)
             })
         }
+        .foregroundStyle(.colorMain)
         .navigationBarHidden(true)
     }
     
