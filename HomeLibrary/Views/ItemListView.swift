@@ -10,11 +10,18 @@ import SwiftUI
 typealias ItemListGrouping = Identifiable & Comparable & Hashable & StringRepresentable
 struct ItemListView<Item: ItemPickable & StringRepresentable, ItemDestination: View, ItemContent: View>: View {
     let listOfItems: [Item]
+    var listOfSortings: [Sorting<Item>]? = nil
+    @State private var currentSorting: Sorting<Item>? = nil
+    @State private var currentSortingAscending = true
     @ViewBuilder var representation: (Item) -> ItemContent
     @ViewBuilder var destination: (Item) -> ItemDestination
     
     @State private var searchField = ""
     @State private var hideSearch = true
+    
+    private var showSearch: Bool {
+        !hideSearch || (listOfSortings != nil && !listOfSortings!.isEmpty)
+    }
     
     func filteredItems() -> [Item] {
         guard !searchField.isEmpty else { return listOfItems }
@@ -23,19 +30,33 @@ struct ItemListView<Item: ItemPickable & StringRepresentable, ItemDestination: V
         }
     }
     
+    func sortedItems(items: [Item]) -> [Item] {
+        guard let currentSorting else { return items.sorted() }
+        
+        let sortedItems = items.sorted(by: currentSorting.closure)
+        return currentSortingAscending ? sortedItems : sortedItems.reversed()
+    }
+    
     var body: some View {
         ScrollViewReader { proxy in
             ScrollView {
                 LazyVStack(spacing: 0, pinnedViews: [.sectionHeaders]) {
                     // MARK: Search field
-                    if !hideSearch {
-                        SearchField(searchText: $searchField)
+                    if showSearch {
+                        HStack(spacing: 0) {
+                            SearchField(searchText: $searchField)
+                            if let listOfSortings, !listOfSortings.isEmpty {
+                                SortingMenu(selectedSorting: $currentSorting, ascending: $currentSortingAscending, listOfSortings: listOfSortings)
+                                    .padding(.trailing, 10)
+                            }
+                        }
+                        .background(.colorMain4)
                     }
                     
                     Section {
-                        ListOfItems(items: filteredItems().sorted())
+                        ListOfItems(items: sortedItems(items: filteredItems()))
                     } header: {
-                        if hideSearch {
+                        if !showSearch {
                             Button {
                                 withAnimation {
                                     hideSearch = false
@@ -67,6 +88,9 @@ struct ItemListView<Item: ItemPickable & StringRepresentable, ItemDestination: V
             )
         }
         .background(.white)
+        .onAppear {
+            currentSorting = listOfSortings?.first
+        }
     }
     
     @ViewBuilder
@@ -81,14 +105,81 @@ struct ItemListView<Item: ItemPickable & StringRepresentable, ItemDestination: V
     }
 }
 
+private struct SortingMenu<Item>: View {
+    @Binding var selectedSorting: Sorting<Item>?
+    @Binding var ascending: Bool
+    let listOfSortings: [Sorting<Item>]
+    
+    var body: some View {
+        Menu {
+            Menu("Sorting") {
+                ForEach(listOfSortings, id: \.by) { sorting in
+                    Button(action: { setSelectedSorting(to: sorting) } ) {
+                        if selectedSorting == sorting {
+                            Label(sorting.by, systemImage: "checkmark")
+                        } else {
+                            Text(sorting.by)
+                        }
+                    }
+                }
+                Divider()
+                Button(action: setToAscending){
+                    if ascending {
+                        Label("Ascending", systemImage: "checkmark")
+                    } else {
+                        Text("Ascending")
+                    }
+                }
+                
+                Button(action: setToDescending){
+                    if !ascending {
+                        Label("Descending", systemImage: "checkmark")
+                    } else {
+                        Text("Desscending")
+                    }
+                }
+            }
+        } label: {
+            Image(systemName: "slider.horizontal.3")
+                .font(.headline)
+                .foregroundStyle(.colorMain)
+        }
+    }
+    
+    func setSelectedSorting(to newSorting: Sorting<Item>) {
+        withAnimation {
+            selectedSorting = newSorting
+        }
+    }
+    
+    func setToAscending() {
+        withAnimation {
+            ascending = true
+        }
+    }
+    
+    func setToDescending() {
+        withAnimation {
+            ascending = false
+        }
+    }
+}
+
 struct ItemGrouppedListView<Item: ItemPickable & StringRepresentable, ItemDestination: View, ItemContent: View, ItemGrouping: ItemListGrouping>: View {
     let listOfItems: [Item]
     var groupingParameter: KeyPath<Item, ItemGrouping>
+    var listOfSortings: [Sorting<Item>]? = nil
+    @State private var currentSorting: Sorting<Item>? = nil
+    @State private var currentSortingAscending = true
     @ViewBuilder var representation: (Item) -> ItemContent
     @ViewBuilder var destination: (Item) -> ItemDestination
     
     @State private var searchField = ""
     @State private var hideSearch = true
+    
+    private var showSearch: Bool {
+        !hideSearch || (listOfSortings != nil && !listOfSortings!.isEmpty)
+    }
     
     var groups: [ItemGrouping] {
         Set(listOfItems.map{ $0[keyPath: groupingParameter] }).sorted()
@@ -105,21 +196,36 @@ struct ItemGrouppedListView<Item: ItemPickable & StringRepresentable, ItemDestin
         filteredItems().filter { $0[keyPath: groupingParameter] == group }
     }
     
+    func sortedItems(items: [Item]) -> [Item] {
+        guard let currentSorting else { return items.sorted() }
+        
+        let sortedItems = items.sorted(by: currentSorting.closure)
+        return currentSortingAscending ? sortedItems : sortedItems.reversed()
+    }
+    
     var body: some View {
         ScrollViewReader { proxy in
             ScrollView {
                 LazyVStack(spacing: 0, pinnedViews: [.sectionHeaders]) {
                     // MARK: Search field
-                    if !hideSearch {
-                        SearchField(searchText: $searchField)
+                    if showSearch {
+                        HStack(spacing: 0) {
+                            SearchField(searchText: $searchField)
+                            
+                            if let listOfSortings, !listOfSortings.isEmpty {
+                                SortingMenu(selectedSorting: $currentSorting, ascending: $currentSortingAscending, listOfSortings: listOfSortings)
+                                    .padding(.trailing, 10)
+                            }
+                        }
+                        .background(.colorMain4)
                     }
                     
                     let groups = groups
                     ForEach(groups) { group in
-                        let items = filteredItems(by: group).sorted()
+                        let items = filteredItems(by: group)
                         if items.count > 0 {
                             Section {
-                                ListOfItems(items: filteredItems(by: group).sorted())
+                                ListOfItems(items: sortedItems(items: items))
                             } header: {
                                 Text(group.representation)
                                     .fontWeight(.semibold)
@@ -134,7 +240,7 @@ struct ItemGrouppedListView<Item: ItemPickable & StringRepresentable, ItemDestin
                 }
             }
             .overlay {
-                if hideSearch {
+                if !showSearch {
                     Button {
                         withAnimation {
                             hideSearch = false
@@ -163,6 +269,9 @@ struct ItemGrouppedListView<Item: ItemPickable & StringRepresentable, ItemDestin
             )
         }
         .background(.white)
+        .onAppear {
+            currentSorting = listOfSortings?.first
+        }
     }
     
     @ViewBuilder
@@ -259,7 +368,7 @@ private struct ItemListViewDemo2: View {
     
     var body: some View {
         NavigationView {
-            ItemGrouppedListView(listOfItems: storages, groupingParameter: \.room) { storage in
+            ItemGrouppedListView(listOfItems: storages, groupingParameter: \.room, listOfSortings: MyStorage.sortings) { storage in
                 HStack {
                     Group {
                         if let image = storage.image {

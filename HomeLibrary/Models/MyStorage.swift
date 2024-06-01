@@ -44,3 +44,10 @@ extension MyStorage: Hashable, Comparable {
         lhs.name < rhs.name
     }
 }
+
+extension MyStorage {
+    static let sortings: [Sorting<Self>] = [
+        Sorting(by: "Name", closure: { $0.name < $1.name }),
+        Sorting(by: "Room", closure: { $0.room.name < $1.room.name }),
+    ]
+}
