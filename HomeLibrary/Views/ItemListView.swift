@@ -29,17 +29,7 @@ struct ItemListView<Item: ItemPickable & StringRepresentable, ItemDestination: V
                 LazyVStack(spacing: 0, pinnedViews: [.sectionHeaders]) {
                     // MARK: Search field
                     if !hideSearch {
-                        HStack(spacing: 5) {
-                            Image(systemName: "magnifyingglass")
-                                .foregroundStyle(.colorMain)
-                            
-                            TextField("Search", text: $searchField)
-                        }
-                        .padding()
-                        .background(.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
-                        .padding(10)
-                        .background(.colorMain4)
+                        SearchField(searchText: $searchField)
                     }
                     
                     Section {
@@ -68,8 +58,10 @@ struct ItemListView<Item: ItemPickable & StringRepresentable, ItemDestination: V
             .simultaneousGesture(
                 DragGesture()
                     .onChanged { gesture in
-                        withAnimation {
-                            hideSearch = true
+                        if !hideSearch && searchField.isEmpty {
+                            withAnimation {
+                                hideSearch = true
+                            }
                         }
                     }
             )
@@ -119,17 +111,7 @@ struct ItemGrouppedListView<Item: ItemPickable & StringRepresentable, ItemDestin
                 LazyVStack(spacing: 0, pinnedViews: [.sectionHeaders]) {
                     // MARK: Search field
                     if !hideSearch {
-                        HStack(spacing: 5) {
-                            Image(systemName: "magnifyingglass")
-                                .foregroundStyle(.secondary)
-                            
-                            TextField("Search", text: $searchField)
-                        }
-                        .padding()
-                        .background(.white)
-                        .clipShape(RoundedRectangle(cornerRadius: 15))
-                        .padding(10)
-                        .background(.colorMain4)
+                        SearchField(searchText: $searchField)
                     }
                     
                     let groups = groups
@@ -172,8 +154,10 @@ struct ItemGrouppedListView<Item: ItemPickable & StringRepresentable, ItemDestin
             .simultaneousGesture(
                 DragGesture()
                     .onChanged { gesture in
-                        withAnimation {
-                            hideSearch = true
+                        if !hideSearch && searchField.isEmpty {
+                            withAnimation {
+                                hideSearch = true
+                            }
                         }
                     }
             )
@@ -190,6 +174,35 @@ struct ItemGrouppedListView<Item: ItemPickable & StringRepresentable, ItemDestin
             
             Divider()
         }
+    }
+}
+
+private struct SearchField: View {
+    @Binding var searchText: String
+    
+    var body: some View {
+        HStack(spacing: 5) {
+            Image(systemName: "magnifyingglass")
+                .foregroundStyle(.secondary)
+            
+            TextField("Search", text: $searchText)
+            
+            if !searchText.isEmpty {
+                Button {
+                    withAnimation {
+                        searchText = ""
+                    }
+                } label: {
+                    Image(systemName: "x.circle.fill")
+                        .foregroundStyle(.secondary)
+                }
+            }
+        }
+        .padding()
+        .background(.white)
+        .clipShape(RoundedRectangle(cornerRadius: 15))
+        .padding(10)
+        .background(.colorMain4)
     }
 }
 
