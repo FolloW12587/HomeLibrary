@@ -11,11 +11,14 @@ struct BooksView: View {
     @ObservedObject var viewModel = BooksViewModel.shared
     
     var body: some View {
-        VStack(spacing: 0) {
-            title
-            
-            BooksListView(books: viewModel.books)
-
+        NavigationView {
+            VStack(spacing: 0) {
+                title
+                
+                BooksListView(books: viewModel.books)
+                
+            }
+            .navigationBarHidden(true)
         }
     }
     
@@ -25,7 +28,7 @@ struct BooksView: View {
                 .font(.title)
                 .foregroundStyle(.white)
             
-            NavigationLink(destination: Text("")) {
+            NavigationLink(destination: Text("New book")) {
                 Image(systemName: "plus")
                     .font(.headline)
             }

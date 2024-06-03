@@ -23,6 +23,7 @@ struct AuthorDetailsView: View {
             
             Text(author.representation)
                 .font(.title.bold())
+                .foregroundStyle(.colorMain)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(20)
             
@@ -40,7 +41,6 @@ struct AuthorDetailsView: View {
                     .foregroundStyle(.red)
             })
         }
-        .foregroundStyle(.colorMain)
         .navigationBarHidden(true)
     }
     
