@@ -12,12 +12,17 @@ struct ContentView: View {
         TabView {
             BooksView()
                 .tabItem {
-                    Label("Books", systemImage: "book")
+                    Label("Books", systemImage: "books.vertical.fill")
                 }
             
             AuthorsView()
                 .tabItem {
                     Label("Authors", systemImage: "person.2")
+                }
+            
+            GenresView()
+                .tabItem {
+                    Label("Genres", systemImage: "list.star")
                 }
             
             MyPlacesView()

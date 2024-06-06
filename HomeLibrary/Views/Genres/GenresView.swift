@@ -1,33 +1,32 @@
 //
-//  BooksView.swift
+//  GenresView.swift
 //  HomeLibrary
 //
-//  Created by Сергей Дубовой on 01.06.2024.
+//  Created by Сергей Дубовой on 06.06.2024.
 //
 
 import SwiftUI
 
-struct BooksView: View {
-    @ObservedObject var viewModel = BooksViewModel.shared
+struct GenresView: View {
+    @ObservedObject var viewModel = GenresViewModel.shared
     
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
                 title
                 
-                BooksListView(books: viewModel.books)
+                GenresListView(genres: viewModel.genres)
             }
-            .navigationBarHidden(true)
         }
     }
     
     var title: some View {
         ZStack {
-            Text("Books")
+            Text("Genres")
                 .font(.title)
                 .foregroundStyle(.white)
             
-            NavigationLink(destination: Text("New book")) {
+            NavigationLink(destination: Text("New genre")) {
                 Image(systemName: "plus")
                     .font(.headline)
             }
@@ -43,5 +42,5 @@ struct BooksView: View {
 }
 
 #Preview {
-    BooksView()
+    GenresView()
 }

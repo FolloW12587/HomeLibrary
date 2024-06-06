@@ -1,22 +1,22 @@
 //
-//  RoomDetailsView.swift
+//  GenreDetailsView.swift
 //  HomeLibrary
 //
-//  Created by Сергей Дубовой on 28.05.2024.
+//  Created by Сергей Дубовой on 06.06.2024.
 //
 
 import SwiftUI
 
-struct RoomDetailsView: View {
+struct GenreDetailsView: View {
     @Environment(\.dismiss) var dismiss
-    let room: Room
+    let genre: Genre
     
     var body: some View {
         VStack(spacing: 0) {
             title
             
-            StoragesListView(storages: StoragesViewModel.shared.filteredStorages(by: room))
-                        
+            BooksListView(books: BooksViewModel.shared.books.filter({ $0.genre.contains(genre) }))
+
             // TODO: Implement Delete
             Button(action: {}, label: {
                 Text("Delete")
@@ -25,7 +25,7 @@ struct RoomDetailsView: View {
         }
         .navigationBarHidden(true)
     }
-    
+
     var title: some View {
         ZStack {
             Button(action: { dismiss() }) {
@@ -34,8 +34,7 @@ struct RoomDetailsView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             
-            
-            Text(room.name)
+            Text(genre.name)
                 .font(.title)
                 .foregroundStyle(.white)
         }
@@ -50,6 +49,6 @@ struct RoomDetailsView: View {
 
 #Preview {
     NavigationView {
-        RoomDetailsView(room: RoomsViewModel.shared.rooms.first!)
+        GenreDetailsView(genre: Genre.examples[38])
     }
 }

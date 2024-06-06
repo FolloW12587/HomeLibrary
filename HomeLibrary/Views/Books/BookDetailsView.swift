@@ -16,6 +16,9 @@ struct BookDetailsView: View {
             title
             
             VStack(alignment: .leading, spacing: 10) {
+                RatingView(rating: book.rating)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                
                 Text(book.name)
                     .font(.title.bold())
                 
@@ -24,13 +27,21 @@ struct BookDetailsView: View {
                     HStack {
                         Image(systemName: "info.circle")
                         Text(book.author.representation)
+                            .multilineTextAlignment(.leading)
                     }
                     .foregroundStyle(.accent)
+                }
+                
+                if let year = book.year {
+                    Text("\(String(format: "%d", year))")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
                 }
             }
             .foregroundStyle(.colorMain)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(30)
+            .padding(.horizontal, 30)
+            .padding(.top)
             
             Spacer()
         }
