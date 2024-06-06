@@ -40,7 +40,7 @@ struct StorageDetailsView: View {
             .offset(y: -25)
             
             if !books.isEmpty {
-                BooksListView(books: books, showSortings: false)
+                BooksListView(books: books)
             } else {
                 Text("Books of this storage will be here")
             }

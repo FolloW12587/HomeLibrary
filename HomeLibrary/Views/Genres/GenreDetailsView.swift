@@ -15,7 +15,7 @@ struct GenreDetailsView: View {
         VStack(spacing: 0) {
             title
             
-            BooksListView(books: BooksViewModel.shared.books.filter({ $0.genre.contains(genre) }))
+            BooksListView(books: BooksViewModel.shared.books.filter({ $0.genres.contains(genre) }))
 
             // TODO: Implement Delete
             Button(action: {}, label: {

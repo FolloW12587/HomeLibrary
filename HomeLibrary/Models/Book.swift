@@ -14,6 +14,8 @@ struct Book: Identifiable {
     let name: String
     var year: Int? = nil
     
+    var state: BookState = .notRead
+    
     var rating: Int? = nil
     
     // серия
@@ -25,7 +27,7 @@ struct Book: Identifiable {
     var shelfName: String? = nil
     
     // жанр
-    var genre: Set<Genre> = []
+    var genres: Set<Genre> = []
     
     // примечание
     var note: String? = nil  // TODO: Переделать под возможность создавать кастомные примечания для книг
@@ -50,6 +52,46 @@ extension Book: Hashable, Comparable {
     }
 }
 
+extension Book {
+    enum BookState: CaseIterable {
+        case notRead
+        case read
+        case reading
+        case postponed
+        case dropped
+        
+        var color: Color {
+            switch self {
+            case .notRead:
+                .orange
+            case .read:
+                .green
+            case .reading:
+                .yellow
+            case .postponed:
+                .orange
+            case .dropped:
+                .black
+            }
+        }
+        
+        var localized: String {
+            switch self {
+            case .notRead:
+                String(localized: "Not read")
+            case .read:
+                String(localized: "Read")
+            case .reading:
+                String(localized: "Reading")
+            case .postponed:
+                String(localized: "Postponed")
+            case .dropped:
+                String(localized: "Dropped from reading")
+            }
+        }
+    }
+}
+
 extension Book: StringRepresentable {
     var representation: String {
         name
@@ -58,18 +100,18 @@ extension Book: StringRepresentable {
 
 extension Book {
     static let examples: [Book] = [
-        Book(author: Author.examples[0], name: "Преступление и наказание", year: 1866, storage: MyStorage.examples[0], shelfName: "Верхняя", genre: Set([6, 11, 14, 21].map({ Genre.examples[$0] }))),
-        Book(author: Author.examples[0], name: "Идиот", storage: MyStorage.examples[0], shelfName: "Верхняя", genre: Set([6, 11, 14, 21].map({ Genre.examples[$0] }))),
-        Book(author: Author.examples[1], name: "Война и мир", year: 1867, storage: MyStorage.examples[0], shelfName: "Верхняя", genre: Set([6, 11, 33, 21].map({ Genre.examples[$0] }))),
-        Book(author: Author.examples[1], name: "Анна Каренина", year: 1873, rating: 4, storage: MyStorage.examples[0], shelfName: "Верхняя", genre: Set([6, 11, 21, 22].map({ Genre.examples[$0] }))),
+        Book(author: Author.examples[0], name: "Преступление и наказание", year: 1866, storage: MyStorage.examples[0], shelfName: "Верхняя", genres: Set([6, 11, 14, 21].map({ Genre.examples[$0] }))),
+        Book(author: Author.examples[0], name: "Идиот", storage: MyStorage.examples[0], shelfName: "Верхняя", genres: Set([6, 11, 14, 21].map({ Genre.examples[$0] }))),
+        Book(author: Author.examples[1], name: "Война и мир", year: 1867, storage: MyStorage.examples[0], shelfName: "Верхняя", genres: Set([6, 11, 33, 21].map({ Genre.examples[$0] }))),
+        Book(author: Author.examples[1], name: "Анна Каренина", year: 1873, rating: 4, storage: MyStorage.examples[0], shelfName: "Верхняя", genres: Set([6, 11, 21, 22].map({ Genre.examples[$0] }))),
         Book(author: Author.examples[1], name: "Детство", year: 1886, storage: MyStorage.examples[1], shelfName: "Нижняя"),
-        Book(author: Author.examples[2], name: "Гарри Поттер и философский камень", year: 1997, storage: MyStorage.examples[2], genre: Set([0, 20, 10, 38].map({ Genre.examples[$0] })), image: Image("harry_potter_stone")),
-        Book(author: Author.examples[2], name: "Гарри Поттер и Тайная комната", year: 1998, storage: MyStorage.examples[2], genre: Set([0, 20, 10, 38].map({ Genre.examples[$0] }))),
-        Book(author: Author.examples[2], name: "Гарри Поттер и узник Азкабана", year: 1999, storage: MyStorage.examples[2], genre: Set([0, 20, 10, 38].map({ Genre.examples[$0] }))),
-        Book(author: Author.examples[2], name: "Гарри Поттер и Кубок огня", year: 2000, storage: MyStorage.examples[2], genre: Set([0, 20, 10, 38].map({ Genre.examples[$0] }))),
-        Book(author: Author.examples[2], name: "Гарри Поттер и Орден Феникса", year: 2003, storage: MyStorage.examples[2], genre: Set([0, 20, 10, 38].map({ Genre.examples[$0] }))),
-        Book(author: Author.examples[2], name: "Гарри Поттер и Принц-Полукровка", year: 2005, storage: MyStorage.examples[2], genre: Set([0, 20, 10, 38].map({ Genre.examples[$0] }))),
-        Book(author: Author.examples[2], name: "Гарри Поттер и Дары Смерти", year: 2007, storage: MyStorage.examples[2], genre: Set([0, 20, 10, 38].map({ Genre.examples[$0] }))),
+        Book(author: Author.examples[2], name: "Гарри Поттер и философский камень", year: 1997, series: Series.examples[0], numInSeries: 1, storage: MyStorage.examples[2], genres: Set([0, 20, 10, 38].map({ Genre.examples[$0] })), image: Image("harry_potter_stone")),
+        Book(author: Author.examples[2], name: "Гарри Поттер и Тайная комната", year: 1998, series: Series.examples[0], numInSeries: 2, storage: MyStorage.examples[2], genres: Set([0, 20, 10, 38].map({ Genre.examples[$0] }))),
+        Book(author: Author.examples[2], name: "Гарри Поттер и узник Азкабана", year: 1999, series: Series.examples[0], numInSeries: 3, storage: MyStorage.examples[2], genres: Set([0, 20, 10, 38].map({ Genre.examples[$0] }))),
+        Book(author: Author.examples[2], name: "Гарри Поттер и Кубок огня", year: 2000, series: Series.examples[0], numInSeries: 4, storage: MyStorage.examples[2], genres: Set([0, 20, 10, 38].map({ Genre.examples[$0] }))),
+        Book(author: Author.examples[2], name: "Гарри Поттер и Орден Феникса", year: 2003, series: Series.examples[0], numInSeries: 5, storage: MyStorage.examples[2], genres: Set([0, 20, 10, 38].map({ Genre.examples[$0] }))),
+        Book(author: Author.examples[2], name: "Гарри Поттер и Принц-Полукровка", year: 2005, series: Series.examples[0], numInSeries: 6, storage: MyStorage.examples[2], genres: Set([0, 20, 10, 38].map({ Genre.examples[$0] }))),
+        Book(author: Author.examples[2], name: "Гарри Поттер и Дары Смерти", year: 2007, series: Series.examples[0], numInSeries: 7, storage: MyStorage.examples[2], genres: Set([0, 20, 10, 38].map({ Genre.examples[$0] }))),
     ]
 }
 
