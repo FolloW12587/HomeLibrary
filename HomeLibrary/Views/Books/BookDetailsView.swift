@@ -48,6 +48,27 @@ struct BookDetailsView: View {
                     
                     author
                     
+                    if let series = book.series {
+                        NavigationLink(destination: Text(series.name)) {
+                            Group {
+                                if let numInSeries = book.numInSeries {
+                                    Text("Book \(numInSeries) out of \(SeriesViewModel.shared.booksCount(of: series)) in ") +
+                                    Text(series.name)
+                                        .foregroundColor(.accent) +
+                                    Text(" series")
+                                } else {
+                                    Text("Book of ") +
+                                    Text(series.name)
+                                        .foregroundColor(.accent) +
+                                    Text(" series")
+                                }
+                            }
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                        }
+                        .padding(.top)
+                    }
+                    
                     if book.genres.count > 0 {
                         WrappingHStack(items: book.genres.sorted()) { genre in
                             NavigationLink(destination: GenreDetailsView(genre: genre)) {
@@ -68,8 +89,6 @@ struct BookDetailsView: View {
                     }
                     
                     Divider()
-                    
-                    series
                     
                     storage
                 }
@@ -121,38 +140,6 @@ struct BookDetailsView: View {
                     .foregroundStyle(.secondary)
             }
         }
-    }
-    
-    var series: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            if let series = book.series {
-                Text("Series")
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                    .padding(.top, 10)
-                
-                NavigationLink(destination: Text(series.name)) {
-                    HStack {
-                        HStack {
-                            Image(systemName: "info.circle")
-                            Text(series.name)
-                                .multilineTextAlignment(.leading)
-                        }
-                        .foregroundStyle(.accent)
-                    }
-                    
-                    if let numInSeries = book.numInSeries {
-                        Text("\(numInSeries) out of \(SeriesViewModel.shared.booksCount(of: series))")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                            .frame(maxWidth: .infinity, alignment: .trailing)
-                    }
-                }
-                
-                Divider()
-            }
-        }
-        .foregroundStyle(.colorMain)
     }
     
     var storage: some View {

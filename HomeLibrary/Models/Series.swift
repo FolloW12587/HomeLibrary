@@ -31,3 +31,11 @@ extension Series {
         Series(author: Author.examples.last!, name: "Гарри Поттер")
     ]
 }
+
+extension Series {
+    // MARK: Sortings
+    static let sortings: [Sorting<Self>] = [
+        Sorting<Self>(by: "Name", closure: { $0.name < $1.name }),
+        Sorting<Self>(by: "Author", closure: { $0.representation < $1.representation }),
+    ]
+}
