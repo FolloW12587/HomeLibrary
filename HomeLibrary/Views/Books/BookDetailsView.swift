@@ -17,6 +17,28 @@ struct BookDetailsView: View {
             
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
+                    Group {
+                        if let image = book.image {
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                        } else {
+                            Image(systemName: "photo.circle.fill")
+                                .font(.largeTitle)
+                                .foregroundStyle(.white)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 15)
+                                        .fill(
+                                            LinearGradient(colors: [.colorMain3.opacity(0.8), .colorMain3], startPoint: .topTrailing, endPoint: .bottomLeading)
+                                        )
+                                        .frame(width: 150, height: 200)
+                                )
+                        }
+                    }
+                    .frame(height: 200)
+                    .padding(.bottom)
+                    .frame(maxWidth: .infinity)
+                    
                     HStack {
                         BookStateView(state: book.state)
                         
@@ -26,11 +48,30 @@ struct BookDetailsView: View {
                     
                     author
                     
+                    if book.genres.count > 0 {
+                        WrappingHStack(items: book.genres.sorted()) { genre in
+                            NavigationLink(destination: GenreDetailsView(genre: genre)) {
+                                Text(genre.name)
+                                    .font(.subheadline)
+                                    .fontWeight(.semibold)
+                                    .foregroundStyle(.white)
+                                    .multilineTextAlignment(.leading)
+                                    .padding(10)
+                                    .background(
+                                        Capsule().fill(
+                                            LinearGradient(colors: [.colorMain3.opacity(0.8), .colorMain3], startPoint: .topTrailing, endPoint: .bottomLeading)
+                                        )
+                                    )
+                            }
+                        }
+                        .padding(.vertical)
+                    }
+                    
+                    Divider()
+                    
                     series
                     
                     storage
-                    
-                    genres
                 }
                 .foregroundStyle(.colorMain)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -65,18 +106,13 @@ struct BookDetailsView: View {
     
     var author: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Author")
-                .font(.title2)
-                .fontWeight(.semibold)
-                .padding(.top, 10)
-            
             NavigationLink(destination: AuthorDetailsView(author: book.author)) {
-                HStack {
-                    Image(systemName: "info.circle")
-                    Text(book.author.representation)
-                        .multilineTextAlignment(.leading)
-                }
-                .foregroundStyle(.accent)
+                Text(book.author.representation)
+                    .font(.title2)
+                    .fontWeight(.semibold)
+                    .multilineTextAlignment(.leading)
+                    .foregroundStyle(.accent)
+                    .padding(.top, 10)
             }
             
             if let year = book.year {
@@ -84,8 +120,6 @@ struct BookDetailsView: View {
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
-            
-            Divider()
         }
     }
     
@@ -131,57 +165,17 @@ struct BookDetailsView: View {
                 
                 NavigationLink(destination: StorageDetailsView(storage: storage)) {
                     HStack {
-                        Group {
-                            if let image = storage.image {
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                            } else {
-                                Image(systemName: "photo.circle.fill")
-                                    .resizable()
-                                    .opacity(0.7)
-                                    .aspectRatio(contentMode: .fit)
-                                    .foregroundStyle(.colorMain3)
-                            }
-                        }
-                        .frame(width: 44)
-                        .clipShape(Circle())
-                        
+                        Image(systemName: "info.circle")
                         Text(storage.name)
-                            .foregroundStyle(.black)
-                        
-                        Spacer()
-                        
-                        Image(systemName: "chevron.right")
-                            .font(.headline)
-                            .foregroundStyle(.accent)
+                            .multilineTextAlignment(.leading)
                     }
-                    .frame(height: 54)
+                    .foregroundStyle(.accent)
                 }
-                
-                Divider()
-            }
-        }
-        .foregroundStyle(.colorMain)
-    }
-    
-    var genres: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            if book.genres.count > 0 {
-                Text("Genres")
-                    .font(.title2)
-                    .fontWeight(.semibold)
-                    .padding(.top, 10)
-                
-                ForEach(book.genres.sorted()) { genre in
-                    NavigationLink(destination: GenreDetailsView(genre: genre)) {
-                        HStack {
-                            Image(systemName: "info.circle")
-                            Text(genre.name)
-                                .multilineTextAlignment(.leading)
-                        }
-                        .foregroundStyle(.accent)
-                    }
+                if let shelfName = book.shelfName {
+                    Text(shelfName)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.leading)
                 }
                 
                 Divider()
